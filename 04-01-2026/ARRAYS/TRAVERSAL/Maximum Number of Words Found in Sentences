@@ -1,0 +1,36 @@
+class Solution {
+    public int mostWordsFound(String[] sentences) {
+        //USING ARRAYS
+        /*int maxWords = 0;
+        for (String sentence : sentences) {
+            int words = 1; // start with 1 word
+            char[] chars = sentence.toCharArray();
+
+            for (char c : chars) {
+                if (c == ' ') {
+                    words++; // every space means a new word
+                }
+            }
+
+            // Update maximum
+            if (words > maxWords) {
+                maxWords = words;
+            }
+        }
+
+        return maxWords;*/
+
+        //USING STRINGS
+         int maxWords = 0;
+        
+        for (String sentence : sentences) {
+            // Split sentence by space and count words
+            int wordCount = sentence.split(" ").length;
+            
+            // Update maximum
+            maxWords = Math.max(maxWords, wordCount);
+        }
+        
+        return maxWords;
+    }
+}
