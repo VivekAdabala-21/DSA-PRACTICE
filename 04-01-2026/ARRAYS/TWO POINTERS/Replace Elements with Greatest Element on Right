@@ -1,0 +1,32 @@
+class Solution {
+    public int[] replaceElements(int[] arr) {
+      int n = arr.length;
+        /*int i=0;
+        while( i<n)
+        {
+         int max=-1;
+        
+        for(int j=i+1;j<n;j++)
+        {
+           if(max<arr[j])
+           {
+            max=arr[j];
+           }
+            
+        }
+        arr[i]=max;
+        i++;
+        }*/
+        
+        int maxSoFar=-1;
+        for (int i = n - 1; i >= 0; i--) {
+            int current = arr[i]; // store current value
+            arr[i] = maxSoFar;    // replace with max seen so far
+            if (current > maxSoFar) {
+                maxSoFar = current; // update max
+            }
+        }
+
+        return arr;
+    }
+}
