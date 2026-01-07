@@ -1,0 +1,36 @@
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+
+        ListNode curr = head;     // traversal
+        ListNode temp2 = head;    // result 
+
+        while (curr != null && curr.next != null) {
+
+            int sum = 0;
+
+            // collect sum until next zero
+            while (curr.next != null && curr.next.val != 0) {
+                sum += curr.next.val;
+                curr = curr.next;
+            }
+
+            // store sum in current zero node
+            temp2.val = sum;
+
+            // move curr to next zero
+            curr = curr.next;
+
+            // only link if another segment exists
+            if (curr != null && curr.next != null) {
+                temp2.next = curr;
+                temp2 = temp2.next;
+            }
+        }
+
+        // cut off last zero
+        temp2.next = null;
+
+        return head;
+
+    }
+}
