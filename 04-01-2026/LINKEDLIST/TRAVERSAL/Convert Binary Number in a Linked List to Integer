@@ -1,0 +1,13 @@
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        StringBuilder binary = new StringBuilder();
+        ListNode curr = head;
+
+        while (curr != null) {
+            binary.append(curr.val); //ADDING VALUE INTO STRING
+            curr = curr.next;    // UPDATING THE CURRENT 
+        }
+
+        return Integer.parseInt(binary.toString(), 2); //CONVERTING BINARY INTO DECIMAL 
+    }
+}
