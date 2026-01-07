@@ -1,0 +1,30 @@
+class Solution {
+    public ListNode deleteNodes(ListNode head, int m, int n) {
+
+        ListNode curr = head;
+
+        while (curr != null) {
+
+            // 1️. Skip M-1 nodes (keep M nodes)
+            for (int i = 1; i < m && curr != null; i++) {
+                curr = curr.next;
+            }
+
+            if (curr == null) break;
+
+            // 2️. Delete next N nodes
+            ListNode temp = curr.next;
+            for (int i = 0; i < n && temp != null; i++) {
+                temp = temp.next;
+            }
+
+            // 3️. Connect kept part to remaining list
+            curr.next = temp;
+
+            // 4️. Move curr forward
+            curr = temp;
+        }
+
+        return head;
+    }
+}
