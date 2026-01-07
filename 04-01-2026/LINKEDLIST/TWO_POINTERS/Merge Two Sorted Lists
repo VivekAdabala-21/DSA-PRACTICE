@@ -1,0 +1,37 @@
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        // Step 1: Add elements from list1
+        while (list1 != null) {
+            arr.add(list1.val);
+            list1 = list1.next;
+        }
+
+        // Step 2: Add elements from list2
+        while (list2 != null) {
+            arr.add(list2.val);
+            list2 = list2.next;
+        }
+
+        // Step 3: Sort the list
+        Collections.sort(arr);
+
+        // Step 4: Convert ArrayList to Linked List
+        ListNode head = null;
+        ListNode curr = null;
+
+        for (int val : arr) {
+            if (head == null) {
+                head = new ListNode(val);
+                curr = head;
+            } else {
+                curr.next = new ListNode(val);
+                curr = curr.next;
+            }
+        }
+
+        return head;
+    }
+}
