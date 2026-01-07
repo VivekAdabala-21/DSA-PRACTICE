@@ -1,0 +1,37 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ArrayList<Integer> list1 = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        ListNode curr = head;
+        int index = 0;
+
+        while (curr != null) {
+            list1.add(curr.val);
+            map.put(index, curr.val);
+            index++;
+            curr = curr.next;
+        }
+
+        // Step 2: Traverse from last index and store in second list
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        for (int i = list1.size() - 1; i >= 0; i--) {
+            list2.add(map.get(i));
+        }
+
+        // Step 3: Compare using two pointers
+        int left = 0;
+        int right = 0;
+
+        while (left < list1.size() && right < list2.size()) {
+            if (!list1.get(left).equals(list2.get(right))) {
+                return false;
+            }
+            left++;
+            right++;
+        }
+
+        return true;
+    }
+}
