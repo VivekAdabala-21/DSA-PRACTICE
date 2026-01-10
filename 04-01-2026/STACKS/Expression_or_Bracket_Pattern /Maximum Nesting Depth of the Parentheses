@@ -1,0 +1,25 @@
+class Solution {
+    public int maxDepth(String s) {
+        Stack<Character>list=new Stack<>();
+        int FinalCount=0;
+        int count=0;
+        for(char ch:s.toCharArray())
+        {
+            if(ch=='(')
+            {
+                list.push(ch);
+                count++;
+                if(count>FinalCount)
+                {
+                    FinalCount=count;
+                }
+            }
+            else if(ch==')')
+            {
+              list.pop();
+              count--;
+            }
+        }
+        return FinalCount;
+    }
+}
