@@ -1,0 +1,35 @@
+class Solution {
+    public int findTheWinner(int n, int k) {
+
+        // Queue to simulate the circular game
+        Queue<Integer> q = new LinkedList<>();
+
+        // Add players numbered from 1 to n into the queue
+        for (int i = 1; i <= n; i++) {
+            q.add(i);
+        }
+
+        // Continue the game until only one player remains
+        while (q.size() > 1) {
+
+            // Count from 1 to k
+            for (int i = 1; i <= k; i++) {
+
+                // For the first k-1 counts:
+                // move the front player to the back of the queue
+                if (k > i) {
+                    q.add(q.poll());
+                }
+
+                // On the k-th count:
+                // remove (eliminate) the front player
+                if (i == k) {
+                    q.poll();
+                }
+            }
+        }
+
+        // The last remaining player is the winner
+        return q.poll();
+    }
+}
