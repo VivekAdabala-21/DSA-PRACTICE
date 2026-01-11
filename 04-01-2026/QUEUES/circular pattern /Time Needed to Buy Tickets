@@ -1,0 +1,31 @@
+class Solution {
+    public int timeRequiredToBuy(int[] tickets, int k) {
+
+        Queue<Integer> q = new LinkedList<>();
+        for (int a : tickets) {
+            q.add(a);
+        }
+
+        int count = 0;
+        int i = 0;
+
+        while (tickets[k] > 0) {
+
+            int curr = q.poll();
+
+            // only buy if this person still has tickets
+            if (curr > 0) {
+                curr--;
+                tickets[i]--;
+                count++;
+            }
+
+            q.add(curr);
+
+            // move circularly
+            i = (i + 1) % tickets.length;
+        }
+
+        return count;
+    }
+}
