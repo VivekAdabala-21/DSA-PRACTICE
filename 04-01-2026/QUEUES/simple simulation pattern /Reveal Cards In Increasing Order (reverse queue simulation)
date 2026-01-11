@@ -1,0 +1,31 @@
+class Solution {
+    public int[] deckRevealedIncreasing(int[] deck) {
+       // Step 1: Sort the deck
+        Arrays.sort(deck);
+
+        // Deque to build the deck in reverse
+        Deque<Integer> dq = new LinkedList<>();
+
+        // Step 2: Build the deck from largest to smallest
+        for (int i = deck.length - 1; i >= 0; i--) {
+
+            // If deck is not empty, rotate:
+            // move bottom card to top (reverse of reveal operation)
+            if (!dq.isEmpty()) {
+                dq.addFirst(dq.removeLast());
+            }
+
+            // Place current card on top
+            dq.addFirst(deck[i]);
+        }
+
+        // Step 3: Convert deque to array
+        int[] result = new int[deck.length];
+        int index = 0;
+        for (int card : dq) {
+            result[index++] = card;
+        }
+
+        return result;
+    }
+}
