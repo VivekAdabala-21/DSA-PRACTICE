@@ -1,0 +1,26 @@
+class Solution {
+    List<Integer> list1 = new ArrayList<>();
+    List<Integer> list2 = new ArrayList<>();
+    
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        preorder(p, list1);
+        preorder(q, list2);
+
+        if (list1.equals(list2)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void preorder(TreeNode a, List<Integer> list) {
+        if (a == null) {
+            list.add(null);   
+            return;
+        }
+
+        list.add(a.val);
+        preorder(a.left, list);
+        preorder(a.right, list);
+    }
+}
