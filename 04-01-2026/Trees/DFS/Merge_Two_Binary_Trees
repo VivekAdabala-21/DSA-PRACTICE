@@ -1,0 +1,57 @@
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+
+        if (root1 == null) return root2;
+        if (root2 == null) return root1;
+
+        Queue<TreeNode> q1 = new LinkedList<>();
+        Queue<TreeNode> q2 = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+
+        TreeNode root = new TreeNode(root1.val + root2.val);
+
+        q1.add(root1);
+        q2.add(root2);
+        q.add(root);
+
+        while (!q1.isEmpty()) {
+
+            TreeNode a = q1.poll();
+            TreeNode b = q2.poll();
+            TreeNode c = q.poll();
+
+            // LEFT child
+            TreeNode aLeft = (a == null) ? null : a.left;
+            TreeNode bLeft = (b == null) ? null : b.left;
+
+            if (aLeft != null || bLeft != null) {
+                TreeNode left = new TreeNode(
+                    (aLeft == null ? 0 : aLeft.val) +
+                    (bLeft == null ? 0 : bLeft.val)
+                );
+                c.left = left;
+
+                q.add(left);
+                q1.add(aLeft);
+                q2.add(bLeft);
+            }
+
+            // RIGHT child
+            TreeNode aRight = (a == null) ? null : a.right;
+            TreeNode bRight = (b == null) ? null : b.right;
+
+            if (aRight != null || bRight != null) {
+                TreeNode right = new TreeNode(
+                    (aRight == null ? 0 : aRight.val) +
+                    (bRight == null ? 0 : bRight.val)
+                );
+                c.right = right;
+
+                q.add(right);
+                q1.add(aRight);
+                q2.add(bRight);
+            }
+        }
+        return root;
+    }
+}
