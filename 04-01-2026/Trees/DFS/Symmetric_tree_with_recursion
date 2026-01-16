@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        boolean condition = true;
+        if(root==null) return true;
+
+        Queue<TreeNode>q1=new LinkedList<>();
+        Queue<TreeNode>q2=new LinkedList<>();
+        q1.add(root.left);
+        q2.add(root.right);
+        while(!q1.isEmpty() && !q2.isEmpty())
+        {
+            TreeNode a=q1.poll();
+            TreeNode b=q2.poll();
+            if (a == null && b == null) continue;
+            if (a == null || b == null) return false;
+            if(a.val!=b.val) return false;
+            q1.add(a.left);
+            q1.add(a.right);
+            q2.add(b.right);
+            q2.add(b.left);
+        }
+        return condition;
+    }
+}
