@@ -1,0 +1,32 @@
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root==null) return false;
+        Stack<TreeNode>stack=new Stack<>();
+        Stack<Integer>stackSum=new Stack<>();
+
+        stack.push(root);
+        stackSum.push(root.val);
+
+        while(!stack.isEmpty())
+        {
+            TreeNode temp=stack.pop();
+            int sumVal=stackSum.pop();
+
+            if(temp.left==null && temp.right==null && sumVal==targetSum)
+            {
+                return true;
+            }
+            if(temp.left!=null)
+            {
+                stack.push(temp.left);
+                stackSum.push(temp.left.val+sumVal);
+            }
+            if(temp.right!=null)
+            {
+                stack.push(temp.right);
+                stackSum.push(temp.right.val+sumVal);
+            }
+        }
+        return false;
+    }
+}
