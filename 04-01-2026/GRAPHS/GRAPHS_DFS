@@ -1,0 +1,78 @@
+import java.util.*;
+
+class Graph {
+    private ArrayList<ArrayList<Integer>> adjList;
+    private int vertices;
+
+    // Constructor
+    public Graph(int vertices) {
+        this.vertices = vertices;
+        adjList = new ArrayList<>();
+        for (int i = 0; i < vertices; i++) {
+            adjList.add(new ArrayList<>());
+        }
+    }
+
+    // Add edge (Directed)
+    public void addEdge(int source, int destination) {
+        adjList.get(source).add(destination); // Directed edge
+    }
+
+    // DFS using stack (iterative)
+    public void dfs(int start) {
+        boolean[] visited = new boolean[vertices];
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(start);
+
+        System.out.print("DFS Traversal: ");
+
+        while (!stack.isEmpty()) {
+            int vertex = stack.pop();
+
+            if (!visited[vertex]) {
+                visited[vertex] = true;
+                System.out.print(vertex + " ");
+
+                // Push neighbors to stack
+                // Important: push in reverse order if you want to match recursive DFS order
+                ArrayList<Integer> neighbors = adjList.get(vertex);
+                for (int i = neighbors.size() - 1; i >= 0; i--) {
+                    int neighbor = neighbors.get(i);
+                    if (!visited[neighbor]) {
+                        stack.push(neighbor);
+                    }
+                }
+            }
+        }
+
+        System.out.println();
+    }
+
+    // Print graph
+    public void printGraph() {
+        for (int i = 0; i < vertices; i++) {
+            System.out.print(i + " -> ");
+            for (int neighbor : adjList.get(i)) {
+                System.out.print(neighbor + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Graph graph = new Graph(5);
+
+        // Directed graph example
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(3, 4);
+
+        System.out.println("Graph:");
+        graph.printGraph();
+
+        System.out.println();
+        graph.dfs(0); // Start DFS from vertex 0
+    }
+}
