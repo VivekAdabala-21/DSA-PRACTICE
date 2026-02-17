@@ -1,0 +1,78 @@
+package graph;
+import java.util.*;
+public class Graph 
+{
+   private ArrayList<ArrayList<Integer>> adjList;
+   
+   //constructor - initialize all vertices
+   public Graph(int vertices)
+   {
+	   adjList =new ArrayList<>();
+	   
+	   for(int i=0;i<vertices;i++)
+	   {
+		   adjList.add(new ArrayList<>());
+	   }
+   }
+   
+   // Add edge (Undirected)
+   public void addEdge(int source, int destination) {
+       adjList.get(source).add(destination);
+       adjList.get(destination).add(source);
+   }
+   
+   // Remove edge (Undirected)
+   public void removeEdge(int source, int destination) {
+       adjList.get(source).remove(Integer.valueOf(destination));
+       adjList.get(destination).remove(Integer.valueOf(source));
+   }
+   
+  // Remove vertex (removes all edges connected to it)
+   public void removeVertex(int vertex) {
+
+       // Remove this vertex from all other adjacency lists
+       for (int i = 0; i < adjList.size(); i++) 
+       {
+           adjList.get(i).remove(Integer.valueOf(vertex));
+       }
+
+       // Clear its own list
+       adjList.get(vertex).clear();
+   }
+   
+   //PRINT GRAPH
+
+   public void printGraph() {
+       for (int i = 0; i < adjList.size(); i++) {
+           System.out.print(i + " -> ");
+           for (int neighbor : adjList.get(i)) {
+               System.out.print(neighbor + " ");
+           }
+           System.out.println();
+       }
+   }
+
+
+
+    public static void main(String[] args) {
+
+        Graph graph = new Graph(5); // vertices 0 to 4
+
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(3, 4);
+
+        System.out.println("Original Graph:");
+        graph.printGraph();
+
+        graph.removeEdge(0, 1);
+        System.out.println("\nAfter removing edge (0,1):");
+        graph.printGraph();
+
+        graph.removeVertex(3);
+        System.out.println("\nAfter removing vertex 3:");
+        graph.printGraph();
+    }
+}
+
